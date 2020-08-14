@@ -11,7 +11,7 @@ BENCHMARK_DIR_PATH="/home/oslab2/Documents/github.com/benchmarks/:/mnt/benchmark
 
 THREADS=4
 
-for i in $(seq 3 $(($NUM_NODES+2)));
+for i in $(seq 2 $(($NUM_NODES+1)));
 do
 	ADDRESS+="${IPADDRESS}${i}:${PORT},"
 done
