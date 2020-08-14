@@ -10,6 +10,7 @@ PORT=5012
 BENCHMARK_DIR_PATH="/home/oslab2/Documents/github.com/benchmarks/:/mnt/benchmarks/"
 
 THREADS=4
+MODEL=$2
 
 for i in $(seq 2 $(($NUM_NODES+1)));
 do

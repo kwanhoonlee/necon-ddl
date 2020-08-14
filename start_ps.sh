@@ -18,13 +18,13 @@ ADDRESS=${ADDRESS::-1}
 echo $ADDRESS
 
 docker run --shm-size="8g" --name p0 --network $BRIDGE \
--v $BENCHMARK_DIR_PATH -p ${PORT}/tcp -d tensorflow/tensorflow:1.12.0-rc2 \
+-v $BENCHMARK_DIR_PATH -p ${PORT}/tcp -d tensorflow/tensorflow:1.12.0-rc2
 
 
 docker exec -d p0 python ../mnt/benchmarks/scripts/tf_cnn_benchmarks/tf_cnn_benchmarks.py \
 --batch_size=64 --model=${MODEL} --variable_update=parameter_server --data_format=NHWC \
---job_name=worker --ps_hosts=${PS_IPADDR}2:${PORT} \
+--job_name=ps --ps_hosts=${PS_IPADDR}2:${PORT} \
 --worker_hosts=${ADDRESS} --num_intra_threads=${THREADS} --num_inter_threads=${THREADS} \
---data_name=imagenet --cross_replica_sync=true --task_index=${i}
+--data_name=imagenet --cross_replica_sync=true
 
 
