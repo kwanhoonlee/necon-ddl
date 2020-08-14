@@ -1,5 +1,5 @@
 #!/bin/bash
-
+NUM_NODES=$1
 NUM_CPUS=2
 PS_IPADDR=172.24.0.
 IPADDRESS=172.23.0.
@@ -7,11 +7,15 @@ BRIDGE="br-n-ddl"
 PORT=5012
 BENCHMARK_DIR_PATH="/home/test/Documents/github.com/benchmarks/:/mnt/benchmarks/"
 THREADS=2
+MODEL=$2
 
 for i in $(seq 3 $(($NUM_NODES+2)));
 do
 	ADDRESS+="${IPADDRESS}${i}:${PORT},"
 done
+
+ADDRESS=${ADDRESS::-1}
+echo $ADDRESS
 
 docker run --shm-size="8g" --name p0 --network $BRIDGE \
 -v $BENCHMARK_DIR_PATH -p ${PORT}/tcp -d tensorflow/tensorflow:1.12.0-rc2 \
